@@ -74,16 +74,6 @@ class Predictor(BasePredictor):
 
         output = self.pipe(**common_args)
 
-        # image = self.pipe(
-        #     prompt=prompt,
-        #     negative_prompt=negative_prompt,
-        #     num_inference_steps=num_inference_steps,
-        #     guidance_scale=guidance_scale,
-        #     generator=generator
-        # ).images[0]
-        # output_path = "output.png"
-        # image.save(output_path)
-
         output_paths = []
         for i, image in enumerate(output.images):
             output_path = f"/tmp/out-{i}.png"

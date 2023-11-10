@@ -14,4 +14,4 @@ Then, you can run predictions:
 
 "a close-up picture of an old man standing in the rain"
 
-![alt text](output.png)
+![alt text](output.0.png)
