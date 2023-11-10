@@ -1,0 +1,29 @@
+#!/usr/bin/env python
+import os
+import sys
+import torch
+from diffusers import UNet2DConditionModel, DiffusionPipeline, LCMScheduler
+
+# append project directory to path so predict.py can be imported
+sys.path.append('.')
+
+from predict import MODEL_NAME, MODEL_UNET, MODEL_CACHE, UNET_CACHE
+
+# Make cache folder
+if not os.path.exists(MODEL_CACHE):
+    os.makedirs(MODEL_CACHE)
+
+unet = UNet2DConditionModel.from_pretrained(
+    MODEL_UNET,
+    torch_dtype=torch.float16,
+    variant="fp16",
+    cache_dir=UNET_CACHE
+)
+
+pipe = DiffusionPipeline.from_pretrained(
+    MODEL_NAME,
+    unet=unet,
+    torch_dtype=torch.float16,
+    variant="fp16",
+    cache_dir=MODEL_CACHE
+)
