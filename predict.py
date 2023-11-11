@@ -18,14 +18,16 @@ class Predictor(BasePredictor):
             MODEL_UNET,
             torch_dtype=torch.float16,
             variant="fp16",
-            cache_dir=UNET_CACHE
+            cache_dir=UNET_CACHE,
+            local_files_only=True,
         )
         self.pipe = DiffusionPipeline.from_pretrained(
             MODEL_NAME,
             unet=unet,
             torch_dtype=torch.float16,
             variant="fp16",
-            cache_dir=MODEL_CACHE
+            cache_dir=MODEL_CACHE,
+            local_files_only=True,
         ).to("cuda")
 
     def predict(
